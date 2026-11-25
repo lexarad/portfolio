@@ -78,11 +78,30 @@ p { margin: 0; }
 .btn-ink { background: var(--ink); color: #fff; }
 .btn-ink:hover { background: var(--yellow); color: var(--ink); }
 
-.grid { width: 100%; max-width: 380px; justify-self: end; color: var(--ink); }
-.grid .lit { fill: var(--yellow); stroke: var(--ink); }
+/* The flower tile of Barcelona's pavements (panot de flor), as a faint texture behind the hero. */
+.hero-band { position: relative; isolation: isolate; border-bottom: 2px solid var(--ink); margin-bottom: 4.5rem; }
+.hero-band::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23172036' stroke-opacity='.11' stroke-width='1.4'%3E%3Crect x='.7' y='.7' width='62.6' height='62.6'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cellipse cx='32' cy='16' rx='6.5' ry='10'/%3E%3Cellipse cx='32' cy='48' rx='6.5' ry='10'/%3E%3Cellipse cx='16' cy='32' rx='10' ry='6.5'/%3E%3Cellipse cx='48' cy='32' rx='10' ry='6.5'/%3E%3Ccircle cx='0' cy='0' r='9'/%3E%3Ccircle cx='64' cy='0' r='9'/%3E%3Ccircle cx='0' cy='64' r='9'/%3E%3Ccircle cx='64' cy='64' r='9'/%3E%3C/g%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(100deg, transparent 25%, #000 70%);
+  mask-image: linear-gradient(100deg, transparent 25%, #000 70%);
+}
+
+.map { margin: 0; justify-self: end; width: 100%; max-width: 440px; }
+.map svg {
+  display: block; width: 100%; height: auto;
+  clip-path: polygon(12% 0, 88% 0, 100% 12%, 100% 88%, 88% 100%, 12% 100%, 0 88%, 0 12%);
+}
+.map-street { font: 700 9.5px var(--font); fill: var(--ink); }
+.map-sea { font: 500 13px var(--font); fill: #e6eef6; letter-spacing: .04em; }
+.map figcaption {
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  margin-top: .8rem; font-size: .9rem; color: var(--muted);
+}
+.map figcaption #bcn-time { color: var(--ink); font-weight: 500; }
 @media (prefers-reduced-motion: no-preference) {
-  .grid .lit { animation: light 1.2s .3s both cubic-bezier(.2, .7, .2, 1); }
-  @keyframes light { from { fill-opacity: 0; } to { fill-opacity: 1; } }
+  .pulse { transform-origin: 200px 200px; animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(3.2); opacity: 0; } }
 }
 
 /* Featured */
@@ -157,7 +176,7 @@ p { margin: 0; }
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: 2rem; }
-  .grid { max-width: 200px; justify-self: start; order: -1; }
+  .map { max-width: 340px; justify-self: start; }
   .featured { grid-template-columns: 1fr; }
   .phones { padding: 1.5rem 0 0; max-width: 520px; }
   .community-grid { grid-template-columns: 1fr; }
@@ -167,5 +186,6 @@ p { margin: 0; }
   .top nav { order: 3; width: 100%; margin-left: 0; gap: 1rem; font-size: .9rem; }
   .lang { margin-left: auto; }
   .featured-body { padding: 2rem 1.4rem; }
-  .grid { display: none; }
+  .map { max-width: 320px; }
+  .hero-band::before { -webkit-mask-image: linear-gradient(180deg, transparent 50%, #000 85%); mask-image: linear-gradient(180deg, transparent 50%, #000 85%); }
 }

@@ -15,4 +15,14 @@
   });
 
   label();
+
+  var clock = document.getElementById('bcn-time');
+  var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit' });
+  function tick() {
+    var t = fmt.format(new Date());
+    clock.innerHTML = '<span data-l="en">' + t + ' in Barcelona now</span><span data-l="es">Ahora son las ' + t + ' en Barcelona</span>';
+    clock.hidden = false;
+  }
+  tick();
+  setInterval(tick, 30000);
 })();
